@@ -1,0 +1,56 @@
+# 复制到项目根目录，改名为 .pre-commit-config.yaml，然后执行：
+#   pip install pre-commit && pre-commit install && pre-commit install --hook-type commit-msg
+# 不用的语言对应的段落可以删掉。
+repos:
+  # 通用检查：文件末尾换行、行尾空格、大文件、合并冲突标记、私钥
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=5120"]
+      - id: detect-private-key
+      - id: no-commit-to-branch
+        args: ["--branch", "main", "--branch", "master"]
+
+  # 密钥扫描
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  # 提交信息格式：Conventional Commits
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, refactor, perf, test, docs, style, chore, ci, build, revert]
+
+  # Python：lint + 格式化
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  # 本地钩子：前端 lint 和模块边界检查（按项目实际调整命令）
+  - repo: local
+    hooks:
+      - id: frontend-lint
+        name: 前端 lint
+        entry: npm run lint --
+        language: system
+        files: \.(ts|tsx|js|jsx|vue)$
+        pass_filenames: false
+      - id: module-boundaries
+        name: 模块边界检查
+        entry: python tests/test_module_boundaries.py .
+        language: system
+        files: \.(py|ts|tsx|js|jsx|vue)$
+        pass_filenames: false
