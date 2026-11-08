@@ -16,6 +16,7 @@
 | [structured-writing](./structured-writing/) | 中文职场文档的起草、审阅与重构：金字塔原理、SCQA、MECE、结论先行，含结构反模式诊断和数据自洽检查 |
 | [dev-standards](./dev-standards/) | 团队开发规范：契约先行、单任务开发、模块边界、测试、Git、完成标准，含前后端细则，附模块边界测试和完成检查脚本 |
 | [prd-drafting](./prd-drafting/) | 把业务方模糊的口头表述转成研发能直接接的 PRD：先把「方案」还原成「需求」，再补齐边界、异常态、验收标准与数据口径 |
+| [litigation-case-analysis](./litigation-case-analysis/) | 民事诉讼案卷分析：按程序阶段和案由分流，做证据自洽、鉴定意见拆解、外部锚点、举证责任、事实硬伤、代理方案和对抗推演，附证据矛盾检查脚本和仿真案卷 |
 
 ## 使用方式
 
